@@ -7,9 +7,12 @@ Para ayudarles a determinar a qué clientes merece la pena retener, les proponem
 
 ## Ejercicio 1: Fuga de clientes
 
-Para este ejercicio, como integrante del área de Advanced Analytics tienes que analizar la BBDD para comprender los factores
-que afectan a la fuga de clientes. El objetivo es definir el problema, llevar a cabo tareas de data wrangling, ingeniería de variables,
-análisis exploratorio proporcionando ideas y conclusiones y por último explorar diferentes técnicas de modelización, eligiendo la mejor y comentando resultados.
+Para este ejercicio, como integrante del área de Advanced Analytics tienes que analizar la BBDD para comprender los factores que afectan a la fuga de clientes. El objetivo es definir el problema, llevar a cabo tareas de:
+- data wrangling
+- ingeniería de variables
+- análisis exploratorio 
+
+Proporcionando ideas y conclusiones y por último explorar diferentes técnicas de modelización, eligiendo la mejor y comentando resultados.
 
 **La variable dependiente es: "anula"**
 Adicionalmente se cuenta con otra BBDD con variables sociodemográficas por zona más relevantes para enriquecer el modelo.
@@ -49,3 +52,21 @@ El objetivo del ejercicio es usar el modelo de IA que consideres más apropiado 
 # Configuracion
 
 - uv
+
+
+
+# Schema en git
+
+.
+├── main.py
+├── notebooks/
+│   └── ejercicio1.ipynb
+├── src/
+│   └── utils/
+│       ├── __init__.py
+│       ├── text.py              # funciones genéricas (quitar tildes, slug)
+│       └── data_cleaning.py     # funciones domain-specific + transformers
+├── config/
+│   └── canonicos.yaml           # mapeos por columna (editable)
+├── pyproject.toml
+└── uv.lock

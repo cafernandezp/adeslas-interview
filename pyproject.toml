@@ -20,4 +20,16 @@ dependencies = [
   "python-dotenv>=1.1.1",
 ]
 
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# Indica que el código vivo está en src/
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+# Descubre paquetes dentro de src/
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.uv]
