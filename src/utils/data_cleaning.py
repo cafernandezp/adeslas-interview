@@ -74,3 +74,33 @@ def clean_canal_entrada(s: pd.Series) -> Tuple[pd.Series, pd.DataFrame]:
         "oficina_adelsas": "oficina_adeslas"
     }
     return clean_categorical(s, synonyms=synonyms)
+
+
+def clean_cia_procedencia(s: pd.Series) -> Tuple[pd.Series, pd.DataFrame]:
+    """Limpia 'cia_procedencia' y unifica variantes conocidas vía sinónimos.
+
+    Reglas:
+      - Normaliza a snake_case sin tildes (usa to_snake_es).
+      - Une 'mutua_madrilenya' y 'mutua_madrilena' en 'mutua_madrilena'.
+
+    Args:
+        s: Serie original 'cia_procedencia' (puede contener NaN).
+
+    Returns:
+        (serie_limpia, log_cambios):
+            - serie_limpia: Serie transformada (mismo índice que s).
+            - log_cambios: DataFrame ['original', 'final', 'count'] para auditoría.
+    """
+    synonyms = {
+        # Caso reportado
+        "mutua madrilenya": "mutua madrilena",
+        "mutua madrileña": "mutua madrilena",
+        # (Opcionales: ejemplos de identidad explícita o correcciones futuras)
+        # "union alcoyana": "union alcoyana",
+        # "pelayo": "pelayo",
+        # "axa": "axa",
+        # "liberty": "liberty",
+        # "ocaso": "ocaso",
+        # "verti": "verti",
+    }
+    return clean_categorical(s, synonyms=synonyms)
