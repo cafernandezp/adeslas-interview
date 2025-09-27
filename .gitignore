@@ -1,43 +1,73 @@
-# Checkpoints y cachés de Jupyter
-.ipynb_checkpoints
-*/.ipynb_checkpoints/*
+# --- Entornos / gestores ---
+.venv/
+# pyenv (opcional: ignóralo si no quieres fijar versión por repo)
+.python-version
 
-# Archivos de sistema de macOS
+# --- Variables de entorno ---
+.env
+.env.* 
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- macOS ---
 .DS_Store
-**/.DS_Store
 
-# Archivos de caché de Python
-__pycache__
+# --- Python cachés / tooling ---
+__pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+.hypothesis/
 
-# Archivos de datos o modelos grandes
+# --- Build / empaquetado ---
+dist/
+build/
+*.egg-info/
+pip-wheel-metadata/
+
+# --- Logs / resultados temporales ---
+logs/
+.results/
+
+# --- Datos y modelos (ignora carpeta; deja README y muestras si quieres) ---
+/data/*
+!/data/.gitkeep
+!/data/README.md
+
+# Si prefieres ignorar por extensión (con cuidado):
+*.parquet
+*.feather
+*.tsv
+*.tab
 *.pt
 *.pkl
 *.h5
-*.csv
+*.joblib
 
-# Archivos multimedia (fotos y videos)
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.bmp
-*.tiff
-*.svg
-*.mp4
-*.mov
-*.avi
-*.wmv
-*.flv
-*.mkv
+# --- Multimedia (evitar global si tu notebook necesita imágenes) ---
+# Si decides ignorarlos globalmente, descomenta:
+# *.jpg
+# *.jpeg
+# *.png
+# *.gif
+# *.bmp
+# *.tiff
+# *.svg
+# *.mp4
+# *.mov
+# *.avi
+# *.wmv
+# *.flv
+# *.mkv
 
-# Archivos de configuración específicos
+# --- IDEs ---
 .vscode/
-
-
-.results/
-
-.databricks
-
-logs/
+.idea/
+# Databricks (si aplicara)
+.databricks/

@@ -1,0 +1,23 @@
+[project]
+name = "adeslas-interview"
+version = "0.1.0"
+description = "Entorno DS local con uv"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "matplotlib>=3.8",
+  "seaborn>=0.13",
+  "scikit-learn>=1.4,<1.6",
+  "xgboost>=2.0",
+  "scorecardpy",
+  "jupyterlab>=4.0",
+  "notebook>=7.0",
+  "ipykernel>=6.0",
+  "openpyxl>=3.1", # opcional, para Excel
+  "python-dotenv>=1.1.1",
+]
+
+[tool.uv]
