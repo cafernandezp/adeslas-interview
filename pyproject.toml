@@ -11,13 +11,15 @@ dependencies = [
   "matplotlib>=3.8",
   "seaborn>=0.13",
   "scikit-learn>=1.4,<1.6",
-  "xgboost>=2.0",
+  "xgboost>=2.0", 
   "scorecardpy",
   "jupyterlab>=4.0",
   "notebook>=7.0",
   "ipykernel>=6.0",
   "openpyxl>=3.1", # opcional, para Excel
   "python-dotenv>=1.1.1",
+  "optuna>=4.5.0",
+  "plotly>=6.3.0",
 ]
 
 [build-system]
