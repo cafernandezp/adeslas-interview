@@ -56,17 +56,35 @@ El objetivo del ejercicio es usar el modelo de IA que consideres más apropiado 
 
 
 # Schema en git
-
+tree
 .
+├── README.md
 ├── main.py
-├── notebooks/
-│   └── ejercicio1.ipynb
-├── src/
-│   └── utils/
-│       ├── __init__.py
-│       ├── text.py              # funciones genéricas (quitar tildes, slug)
-│       └── data_cleaning.py     # funciones domain-specific + transformers
-├── config/
-│   └── canonicos.yaml           # mapeos por columna (editable)
+├── notebooks
+│   ├── 01-data-cleaning.ipynb
+│   ├── 02-feature-eng.ipynb
+│   ├── 03-feature-selection-split.ipynb
+│   └── 04-model.ipynb
 ├── pyproject.toml
+├── src
+│   ├── adeslas_interview.egg-info
+│   │   ├── PKG-INFO
+│   │   ├── SOURCES.txt
+│   │   ├── dependency_links.txt
+│   │   ├── requires.txt
+│   │   └── top_level.txt
+│   └── utils
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-313.pyc
+│       │   ├── data_cleaning.cpython-313.pyc
+│       │   ├── feature_selection.cpython-313.pyc
+│       │   ├── model_training.cpython-313.pyc
+│       │   ├── outlier_summary.cpython-313.pyc
+│       │   └── text.cpython-313.pyc
+│       ├── data_cleaning.py
+│       ├── feature_selection.py
+│       ├── model_training.py
+│       ├── outlier_summary.py
+│       └── text.py
 └── uv.lock

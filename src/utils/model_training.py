@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Sequence, Tuple
+from typing import Dict, Iterable, List, Mapping, Sequence, Tuple, Optional
 
 import joblib
 import numpy as np
@@ -12,8 +12,7 @@ from xgboost import XGBClassifier
 from xgboost.callback import EarlyStopping 
 from scipy.stats import loguniform, randint, uniform
 from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold
-from sklearn.metrics import precision_recall_curve
-
+from sklearn.metrics import precision_recall_curve, roc_curve, auc
 
 
 # -----------------------------------------------------------------------------
@@ -742,3 +741,45 @@ def plot_curves_train_val(
         "prev_train": prev_tr,
         "prev_val": prev_va,
     }
+
+
+
+
+
+def select_threshold_max_recall(
+    y_true: pd.Series | np.ndarray,
+    y_proba: np.ndarray,
+    min_precision: float = 0.30,
+    grid: Optional[Sequence[float]] = None,
+) -> Optional[ThresholdReport]:
+    """Select the threshold with maximum recall among those meeting a minimum precision.
+
+    Args:
+        y_true: Ground-truth binary labels {0,1}.
+        y_proba: Predicted probabilities for the positive class in [0, 1].
+        min_precision: Minimum acceptable precision to consider a threshold feasible.
+        grid: Optional list/array of thresholds to evaluate. If None, uses np.linspace(0.05, 0.95, 19).
+
+    Returns:
+        ThresholdReport with metrics at the chosen threshold, or None if no threshold meets the constraint.
+
+    Notes:
+        - Ties are broken by higher F1, then by higher threshold (more conservative).
+        - Use this when you want to prioritize precision explicitly (precision-first),
+          while maximizing recall within that constraint.
+    """
+    if grid is None:
+        grid = np.linspace(0.05, 0.95, 19)
+
+    y = np.asarray(y_true).astype(int)
+    best: Optional[ThresholdReport] = None
+
+    for t in grid:
+        rep = threshold_metrics(y, y_proba, threshold=float(t), beta=1.0)  # F1 neutral (for tie-breaking only)
+        if rep.precision >= min_precision:
+            if (best is None) or (rep.recall > best.recall) \
+               or (rep.recall == best.recall and rep.fbeta > best.fbeta) \
+               or (rep.recall == best.recall and rep.fbeta == best.fbeta and rep.threshold > best.threshold):
+                best = rep
+
+    return best
